@@ -30,11 +30,12 @@ import CarDutyCount from '@/views/dutycount/cardutycount/index.vue';
 const routes = [
   {
     path: '/',
+    redirect: '/home', // 添加重定向
     name: 'frame',
     component: FrameView,
     children: [
       {
-        path: '/',
+        path: 'home',
         name: 'home',
         // component: Home,
         component: PeopleDuty,
