@@ -74,11 +74,11 @@ const submitForm = (formEl) => {
         router.push({ name: 'frame' });
         ElMessage.success('登录成功');
       } catch (error) {
-        if(Array.isArray(error)){
-          for (const item of error){
+        if (Array.isArray(error)) {
+          for (const item of error) {
             ElMessage.error(item);
           }
-        }else{
+        } else {
           ElMessage.error(JSON.stringify(error));
         }
       } finally {
@@ -92,49 +92,65 @@ const submitForm = (formEl) => {
 </script>
 <template>
   <div class="h-screen flex items-center justify-center">
-    <div class="p-8 m-1 w-96 shadow-md">
-      <h2
-        class="font-medium text-gray-600 text-2xl leading-tight tracking-wider text-center mb-6"
-      >
-        登录
-      </h2>
-      <el-form
-        ref="ruleFormRef"
-        style="max-width: 400px"
-        :model="ruleForm"
-        status-icon
-        :rules="rules"
-        label-width=""
-        class="demo-ruleForm space-y-6 mx-auto"
-      >
-        <el-form-item label="账号" prop="loginaccount">
-          <el-input
-            v-model="ruleForm.loginaccount"
-            type="text"
-            autocomplete="off"
-          />
-        </el-form-item>
+    <div class="w-1/4 flex-col space-y-2">
+      <div class="space-x-2">
+        <el-text>后端托管在</el-text>
+        <el-tag type="primary">PythonAnywhere </el-tag>
+      </div>
+      <div class="space-x-2">
+        <el-text>前端托管在</el-text>
+        <el-tag type="primary">GitHubPages </el-tag>
+      </div>
+      <div>
+        <el-text type="danger">因为没给钱，所以很慢</el-text>
+      </div>
+    </div>
 
-        <el-form-item label="密码" prop="password">
-          <el-input
-            v-model="ruleForm.password"
-            type="password"
-            autocomplete="off"
-            :show-password="true"
-          />
-        </el-form-item>
+    <div>
+      <div class="p-8 m-1 w-96 shadow-lg">
+        <h2
+          class="font-medium text-gray-600 text-2xl leading-tight tracking-wider text-center mb-6"
+        >
+          登录
+        </h2>
+        <el-form
+          ref="ruleFormRef"
+          style="max-width: 400px"
+          :model="ruleForm"
+          status-icon
+          :rules="rules"
+          label-width=""
+          class="demo-ruleForm space-y-6 mx-auto"
+        >
+          <el-form-item label="账号" prop="loginaccount">
+            <el-input
+              v-model="ruleForm.loginaccount"
+              type="text"
+              autocomplete="off"
+            />
+          </el-form-item>
 
-        <el-form-item>
-          <el-button
-            type="primary"
-            @click="submitForm(ruleFormRef)"
-            class="w-full"
-            :loading="isLoading"
-          >
-            登录
-          </el-button>
-        </el-form-item>
-      </el-form>
+          <el-form-item label="密码" prop="password">
+            <el-input
+              v-model="ruleForm.password"
+              type="password"
+              autocomplete="off"
+              :show-password="true"
+            />
+          </el-form-item>
+
+          <el-form-item>
+            <el-button
+              type="primary"
+              @click="submitForm(ruleFormRef)"
+              class="w-full"
+              :loading="isLoading"
+            >
+              登录
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
   </div>
 </template>
