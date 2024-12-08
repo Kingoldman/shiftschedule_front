@@ -22,4 +22,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // 推送githubpages dist
+  base: './',
+  build: {
+    outDir: 'docs',
+  },
 });
