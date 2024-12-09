@@ -22,8 +22,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  // 推送githubpages dist
-  base: './',
+  // 推送githubpages
+  base: '/shiftschedule_front/',
   build: {
     outDir: 'docs',
   },
