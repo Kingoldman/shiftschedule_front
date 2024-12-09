@@ -39,7 +39,7 @@ defineEmits(['update:isCollapsed']);
   <el-aside :width="asideWidth" class="bg-blue-500 !text-white">
     <div class="bg-blue-500 p-4 text-center font-bold text-xl tracking-widest">
       <RouterLink to="/" class="text-white no-underline"
-        >帅<span v-show="!isCollapsed">无敌</span></RouterLink
+        >王<span v-show="!isCollapsed">隔壁</span></RouterLink
       >
     </div>
 

@@ -99,7 +99,6 @@ const submitForm = (formEl) => {
       </div>
       <div class="space-x-2">
         <el-text>前端托管在</el-text>
-        <el-tag type="primary">Vercel</el-tag>
         <el-tag type="primary">GitHubPages </el-tag>
       </div>
       <div>
