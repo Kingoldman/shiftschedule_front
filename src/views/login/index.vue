@@ -95,10 +95,11 @@ const submitForm = (formEl) => {
     <div class="w-1/4 flex-col space-y-2">
       <div class="space-x-2">
         <el-text>后端托管在</el-text>
-        <el-tag type="primary">PythonAnywhere </el-tag>
+        <el-tag type="primary">PythonAnywhere</el-tag>
       </div>
       <div class="space-x-2">
         <el-text>前端托管在</el-text>
+        <el-tag type="primary">Vercel</el-tag>
         <el-tag type="primary">GitHubPages </el-tag>
       </div>
       <div>
