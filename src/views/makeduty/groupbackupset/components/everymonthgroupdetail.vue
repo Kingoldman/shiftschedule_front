@@ -41,7 +41,7 @@ onMounted(async () => {
 
 <template>
   <schedulemain pagetitle="每月值班组情况">
-    <el-table :data="datas" height="250" style="width: 100%">
+    <el-table :data="datas" height="500" style="width: 100%">
       <el-table-column prop="order_id" label="组序" width="180" />
       <el-table-column prop="name" label="组名称" width="180">
         <template #default="scope">
