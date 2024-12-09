@@ -45,7 +45,7 @@ onMounted(async () => {
       <el-table-column prop="order_id" label="组序" width="180" />
       <el-table-column prop="name" label="组名称" width="180">
         <template #default="scope">
-          <el-tag>{{ scope.row.name }}</el-tag>
+          <el-tag type="warning">{{ scope.row.name }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="staffs" label="组员">
