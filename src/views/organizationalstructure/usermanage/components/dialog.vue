@@ -169,15 +169,15 @@ const submitForm = (formEl) => {
       class="demo-ruleForm"
     >
       <el-form-item label="顺序号" prop="order_id">
-        <el-input v-model="ruleForm.order_id" />
+        <el-input v-model="ruleForm.order_id" clearable />
       </el-form-item>
 
       <el-form-item label="姓名" prop="username">
-        <el-input v-model="ruleForm.username" />
+        <el-input v-model="ruleForm.username" clearable />
       </el-form-item>
 
       <el-form-item label="账号" prop="loginaccount">
-        <el-input v-model="ruleForm.loginaccount" />
+        <el-input v-model="ruleForm.loginaccount" clearable />
       </el-form-item>
 
       <el-form-item label="密码" prop="password">
@@ -185,6 +185,7 @@ const submitForm = (formEl) => {
           v-model="ruleForm.password"
           type="password"
           :show-password="true"
+          clearable
         />
       </el-form-item>
 
@@ -202,7 +203,7 @@ const submitForm = (formEl) => {
         </el-select>
       </el-form-item>
       <el-form-item label="单位" prop="department_id">
-        <el-select v-model="ruleForm.department_id">
+        <el-select v-model="ruleForm.department_id" clearable>
           <el-option
             v-for="(department, index) in why_departments"
             :key="index"
@@ -213,7 +214,7 @@ const submitForm = (formEl) => {
       </el-form-item>
 
       <el-form-item label="值班组" prop="mygroup_id">
-        <el-select v-model="ruleForm.mygroup_id">
+        <el-select v-model="ruleForm.mygroup_id" clearable>
           <el-option
             v-for="(group, index) in why_groups"
             :key="index"
@@ -224,11 +225,11 @@ const submitForm = (formEl) => {
       </el-form-item>
 
       <el-form-item label="手机" prop="phone">
-        <el-input v-model="ruleForm.phone" />
+        <el-input v-model="ruleForm.phone" clearable />
       </el-form-item>
 
       <el-form-item label="性别" prop="gender">
-        <el-select v-model="ruleForm.gender">
+        <el-select v-model="ruleForm.gender" clearable>
           <el-option
             v-for="(option, index) in whyGender"
             :key="index"
@@ -238,7 +239,7 @@ const submitForm = (formEl) => {
         </el-select>
       </el-form-item>
       <el-form-item label="值班状态" prop="state">
-        <el-select v-model="ruleForm.state">
+        <el-select v-model="ruleForm.state" clearable>
           <el-option
             v-for="(option, index) in whyState"
             :key="index"
@@ -249,7 +250,7 @@ const submitForm = (formEl) => {
       </el-form-item>
 
       <el-form-item label="用户状态" prop="status">
-        <el-select v-model="ruleForm.status">
+        <el-select v-model="ruleForm.status" clearable>
           <el-option
             v-for="(option, index) in whyStatus"
             :key="index"
