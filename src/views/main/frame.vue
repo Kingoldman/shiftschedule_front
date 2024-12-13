@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-
+import { ElMessage } from 'element-plus';
 import { useAuthStore } from '@/stores/auth';
 import ScheduleSider from './ScheduleSider/index.vue';
 import AsiderHandler from './AsiderHandler/index.vue';
@@ -20,7 +20,8 @@ const enterinto = async () => {
     await refreshallstore.refresh_all_stores(); // 进来时获取最新数据
     is_into_masking.value = true;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    ElMessage.error(`enterinto: ${error}`);
   } finally {
     operationloading.value = false;
   }

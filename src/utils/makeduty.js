@@ -55,8 +55,8 @@ export const make_duty = (to_arranged_days, groupIndex = 0, why_groups) => {
     } else if (item.vacationday !== null) {
       property = '调休上班';
     } else {
-      console.log(`出现无属性日期: ${item.date}`);
-      return [[], [], `出现无属性日期: ${item.date}`];
+      // console.log(`出现无属性日期: ${item.date}`);
+      return [[], [], `make_duty 出现无属性日期: ${item.date}`];
     }
 
     // fullcalendar展示的数据title、start、end都是必须

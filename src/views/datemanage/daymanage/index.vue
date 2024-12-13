@@ -309,9 +309,9 @@ const get_real_weekend = (to_checked_days, why_weekend) => {
       // 节假日情况 // 已设置，不动
     } else {
       // 2个都有的情况，一般没有
-      console.log(`出现错误属性日期: ${item.date}`);
+      // console.log(`出现错误属性日期: ${item.date}`);
       // ElMessage.error(`出现无属性日期: ${item.date}`);
-      return [[], `出现无属性日期: ${item.date}`];
+      return [[], `daymanage get_real_weekend 出现无属性日期: ${item.date}`];
     }
 
     // 检查是否只有一个为真，同理上面else错误属性日期，其实没必要
