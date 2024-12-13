@@ -59,11 +59,11 @@ const rules = ref({
     },
   ],
   password: [
-    {
-      required: true,
-      message: '密码必填项',
-      trigger: 'blur',
-    },
+    // {
+    //   required: true,
+    //   message: '密码必填项',
+    //   trigger: 'blur',
+    // },
   ],
   username: [
     {
