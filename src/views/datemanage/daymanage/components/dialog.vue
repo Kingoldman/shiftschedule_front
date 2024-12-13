@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watchEffect, watch } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import dayhttp from '@/api/dayhttp';
 import { isNull, removeNullItem } from '@/utils/utils.js';
 import { ElMessage } from 'element-plus';
@@ -43,7 +43,7 @@ let ruleForm = reactive({
   ischecked: 0,
 });
 
-let is_vacationday = ref(false);
+// let is_vacationday = ref(false);
 const ruleFormRef = ref(); //表单ref
 const rules = ref({
   date: [
@@ -69,7 +69,7 @@ let operationloading = defineModel('operationloading');
 
 const emits = defineEmits(['initrequest']); // 修改后通知父组件刷新数据
 
-let initialized = ref(false); // 状态标志 // 状态标志初始化时设置 is_vacationday 的值，而不是在每次更新时都覆盖它。
+// let initialized = ref(false); // 状态标志 // 状态标志初始化时设置 is_vacationday 的值，而不是在每次更新时都覆盖它。
 
 // 有个问题，选不了节假日，待完善
 // 监听 editdataform 的变化

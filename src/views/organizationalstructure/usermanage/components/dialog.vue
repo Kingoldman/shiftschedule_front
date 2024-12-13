@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch, toRefs } from 'vue';
+import { ref, reactive, watch, toRefs, watchEffect } from 'vue';
 import staffhttp from '@/api/staffhttp';
 import { removeNullItem } from '@/utils/utils.js';
 import { whyStatus, whyGender, whyState } from '@/utils/constant';

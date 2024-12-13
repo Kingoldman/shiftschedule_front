@@ -15,6 +15,7 @@ export const make_duty = (to_arranged_days, groupIndex = 0, why_groups) => {
   for (const item of to_arranged_days) {
     // 从 why_groups 中获取当前组
     let currentGroup = why_groups[groupIndex];
+
     // 收集当前组的所有用户
     const dutyers = currentGroup.staffs.map((staff) => staff.username);
     if (dutyers.length === 0) {
@@ -25,6 +26,22 @@ export const make_duty = (to_arranged_days, groupIndex = 0, why_groups) => {
         `第${currentGroup.order_id}组 / ${currentGroup.name} 没有用户`,
       ]; // 抛出错误
     }
+
+    // 这里加入检查，组员是否值班，其实还应该在组加入组员那里进行或者组员加入组那里后端直接判定
+
+    // 使用find方法找到第一个state !== 1的对象，不值班
+    const find_errstate = currentGroup.staffs.find(
+      (staff) => staff.state !== 1
+    );
+
+    if (find_errstate) {
+      return [
+        [],
+        [],
+        `第${currentGroup.order_id}组 / ${find_errstate.username} 在当前安排时间不值班，请检查`,
+      ]; // 抛出错误
+    }
+
     ///////////////////////////////////////////////////////////////////////
 
     // 确定 fullcalendar 每天属性

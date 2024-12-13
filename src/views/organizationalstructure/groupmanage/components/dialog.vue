@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, computed } from 'vue';
 import staffhttp from '@/api/staffhttp';
 import { removeNullItem } from '@/utils/utils.js';
 import { ElMessage } from 'element-plus';
@@ -22,6 +22,12 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+// 选项那里只需要state为1的要值班的
+let stated_users = computed(() =>
+  props.why_users.filter((item) => item.state === 1)
+);
+
 let ruleForm = reactive({
   id: null,
   order_id: null,
@@ -147,7 +153,7 @@ const submitForm = (formEl) => {
       <el-form-item label="包含人员" prop="staffs_ids">
         <el-select v-model="ruleForm.staffs_ids" multiple>
           <el-option
-            v-for="(user, index) in why_users"
+            v-for="(user, index) in stated_users"
             :key="index"
             :label="user.username"
             :value="user.id"
