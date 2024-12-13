@@ -29,27 +29,27 @@ const props = defineProps({
 });
 
 let ruleForm = reactive({
-  id: null,
-  order_id: null,
-  loginaccount: null,
-  password: null,
-  username: null,
-  department_id: null,
-  mygroup_id: null,
-  phone: null,
-  gender: null,
-  status: null,
-  state: null,
-  is_leader: null,
+  id: undefined,
+  order_id: undefined,
+  loginaccount: undefined,
+  password: undefined,
+  username: undefined,
+  department_id: undefined,
+  mygroup_id: undefined,
+  phone: undefined,
+  gender: undefined,
+  status: undefined,
+  state: undefined,
+  is_leader: undefined,
 });
 const ruleFormRef = ref(); //表单ref
 const rules = ref({
   order_id: [
-    {
-      required: true,
-      message: '顺序号必填项',
-      trigger: 'blur',
-    },
+    // {
+    //   required: true,
+    //   message: '顺序号必填项',
+    //   trigger: 'blur',
+    // },
   ],
   loginaccount: [
     {
@@ -169,7 +169,11 @@ const submitForm = (formEl) => {
       class="demo-ruleForm"
     >
       <el-form-item label="顺序号" prop="order_id">
-        <el-input v-model="ruleForm.order_id" clearable />
+        <el-input
+          v-model="ruleForm.order_id"
+          clearable
+          placeholder="空值将自动获取最新顺序号，如有数据将向前插入"
+        />
       </el-form-item>
 
       <el-form-item label="姓名" prop="username">

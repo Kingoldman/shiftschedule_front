@@ -101,9 +101,15 @@ const confirmdelete = async (id, index) => {
   operationloading.value = true; // 设置加载状态为true
   try {
     await staffhttp.deleteDepartment(id);
-    datas.value.splice(index, 1); // 删除数据
-    // whydepartmentstore.deleteDepartment(id);
-    // refresh_whydepartment_related_stores(); // other
+    // 重新请求当页数据
+    searchcontent.value = removeNullItem(searchcontent.value);
+    let res = await staffhttp.getAllDepartments(
+      mypagination.page,
+      pagesize.value,
+      searchcontent.value
+    );
+    mypagination.count = res.count;
+    datas.value = res.results;
     await refreshallstore.refresh_all_stores();
     ElMessage.success('删除成功');
   } catch (error) {
@@ -195,7 +201,7 @@ const initrequest = async () => {
     <el-card shadow="never">
       <div class="flex-col space-y-3">
         <div>
-          <div class="inline-block mr-2">
+          <div class="inline-block mr-2 w-52">
             <el-input
               placeholder="请输入部门名称"
               clearable

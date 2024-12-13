@@ -38,11 +38,11 @@ let ruleForm = reactive({
 const ruleFormRef = ref(); //表单ref
 const rules = ref({
   order_id: [
-    {
-      required: true,
-      message: '顺序号必填项',
-      trigger: 'blur',
-    },
+    // {
+    //   required: true,
+    //   message: '顺序号必填项',
+    //   trigger: 'blur',
+    // },
   ],
   name: [],
 
@@ -144,7 +144,11 @@ const submitForm = (formEl) => {
       class="demo-ruleForm"
     >
       <el-form-item label="顺序号" prop="order_id">
-        <el-input v-model="ruleForm.order_id" />
+        <el-input
+          v-model="ruleForm.order_id"
+          placeholder="空值将自动获取最新顺序号，如有数据将向前插入"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="组名称" prop="name">
         <el-input v-model="ruleForm.name" />

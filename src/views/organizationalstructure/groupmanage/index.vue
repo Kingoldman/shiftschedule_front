@@ -27,8 +27,8 @@ import { useRefreshAllStore } from '@/stores/refreshallstore';
 const refreshallstore = useRefreshAllStore();
 let operationloading = ref(false); // 防止短时间重复提交，
 let searchcontent = ref({
-  order_id: null,
-  name: '',
+  order_id: undefined,
+  name: undefined,
 }); // 搜索双向绑定
 
 // 分页数据
@@ -53,7 +53,6 @@ const requestdatas = async (page) => {
     );
     mypagination.count = res.count;
     // mypagination.page = 1; 因为点击页码函数也执行了本函数，切换了新的页码，所以这里不能定页码，不然又切换到1了
-
     datas.value = res.results;
   } catch (error) {
     if (Array.isArray(error)) {
@@ -96,13 +95,28 @@ const confirmdelete = async (id, index) => {
   operationloading.value = true; // 设置加载状态为true
   try {
     await staffhttp.deleteGroup(id);
-    datas.value.splice(index, 1); // 删除数据
-    // whygroupstore.deleteGroup(id); // 更新store
-    // await refresh_whygroup_related_stores(); // 更新other
-    await refreshallstore.refresh_all_stores();
+    // // 重新请求当页数据
+    searchcontent.value = removeNullItem(searchcontent.value);
+    let res = await staffhttp.getAllGroups(
+      mypagination.page,
+      pagesize.value,
+      searchcontent.value
+    );
+    mypagination.count = res.count;
+    datas.value = res.results;
+
+    await refreshallstore.refresh_all_stores(); // 更新store
+
     ElMessage.success('删除成功');
   } catch (error) {
-    ElMessage.error(JSON.stringify(error));
+    // 处理错误
+    if (Array.isArray(error)) {
+      for (const item of error) {
+        ElMessage.error(item);
+      }
+    } else {
+      ElMessage.error(JSON.stringify(error));
+    }
   } finally {
     operationloading.value = false; // 重置加载状态
   }
@@ -172,15 +186,11 @@ const handlerefresh = async () => {
   await requestdatas(1); // 初始化加载请求所有部门
   mypagination.page = 1; // 初始化页面1
   // store
-  // await whygroupstore.refreshGroups();
-  // await refresh_whygroup_related_stores(); // other
   await refreshallstore.refresh_all_stores();
 };
 
 const initrequest = async () => {
   await handleCurrentChange(mypagination.page); // 重新请求当夜数据
-  // await whygroupstore.refreshGroups(); // 更新store
-  // await refresh_whygroup_related_stores(); // other
   await refreshallstore.refresh_all_stores();
 };
 </script>
@@ -198,7 +208,7 @@ const initrequest = async () => {
               type="number"
             ></el-input>
           </div>
-          <div class="inline-block mr-3 w-32">
+          <div class="inline-block mr-3 w-48">
             <el-input
               placeholder="请输入组名称"
               clearable

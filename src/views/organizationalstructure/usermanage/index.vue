@@ -31,16 +31,16 @@ const refreshallstore = useRefreshAllStore();
 
 let operationloading = ref(false); // 防止短时间重复提交，
 let searchcontent = ref({
-  order_id: null,
-  username: '',
-  loginaccount: '',
-  phone: '',
-  gender: '',
-  status: '',
-  department_id: '',
-  mygroup_id: '',
-  state: '',
-  is_leader: '',
+  order_id: undefined,
+  username: undefined,
+  loginaccount: undefined,
+  phone: undefined,
+  gender: undefined,
+  status: undefined,
+  department_id: undefined,
+  mygroup_id: undefined,
+  state: undefined,
+  is_leader: undefined,
 }); // 搜索双向绑定
 
 // 分页数据
@@ -57,15 +57,13 @@ const requestdatas = async (page) => {
   operationloading.value = true; //加载开始
   try {
     // 先把params中的空值删除
-    searchcontent.value = removeNullItem(searchcontent.value);
+    // searchcontent.value = removeNullItem(searchcontent.value);
     let res = await staffhttp.getAllStaff(
       page,
       pagesize.value,
       searchcontent.value
     );
     mypagination.count = res.count;
-    // mypagination.page = 1; 因为点击页码函数也执行了本函数，切换了新的页码，所以这里不能定页码，不然又切换到1了
-
     datas.value = res.results;
   } catch (error) {
     if (Array.isArray(error)) {
@@ -115,9 +113,16 @@ const confirmdelete = async (id, index) => {
   operationloading.value = true; // 设置加载状态为true
   try {
     await staffhttp.deleteStaff(id);
-    datas.value.splice(index, 1); // 删除数据
-    // whyuserstore.deleteUser(id); // store
-    // await refresh_whyuser_related_stores(); //other store
+    // 获取最新当页数据
+    searchcontent.value = removeNullItem(searchcontent.value);
+    let res = await staffhttp.getAllStaff(
+      mypagination.page,
+      pagesize.value,
+      searchcontent.value
+    );
+    mypagination.count = res.count;
+    datas.value = res.results;
+
     await refreshallstore.refresh_all_stores();
     ElMessage.success('删除成功');
   } catch (error) {
